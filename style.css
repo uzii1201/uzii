@@ -16,7 +16,6 @@ h1 {
     animation: fadeIn 1s ease;
 }
 
-/* Galería responsive */
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -26,7 +25,6 @@ h1 {
     animation: fadeIn 1.5s ease;
 }
 
-/* Track */
 .track {
     position: relative;
     overflow: hidden;
@@ -43,7 +41,6 @@ h1 {
     transition: filter 0.5s ease, transform 0.5s ease;
 }
 
-/* Overlay */
 .track .overlay {
     position: absolute;
     top: 0; left: 0;
@@ -80,14 +77,12 @@ h1 {
     transform: scale(1.05);
 }
 
-/* Efecto hover y active */
-.track:hover img,
+/* Solo activa con click (NO hover) */
 .track.active img {
     filter: blur(5px) brightness(0.7);
     transform: scale(1.05);
 }
 
-.track:hover .overlay,
 .track.active .overlay {
     opacity: 1;
 }

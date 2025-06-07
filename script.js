@@ -1,18 +1,18 @@
 document.querySelectorAll('.track').forEach(track => {
     track.addEventListener('click', function(e) {
-        // Si clicas en un <a>, NO hacemos nada (dejamos que el link funcione)
+        // Si clicas en un <a>, dejamos que funcione el link
         if (e.target.tagName === 'A') {
-            return; // Deja que el link funcione normal
+            return;
         }
 
-        // Si la track ya estaba activa → quitar active
+        // Si esta track ya está activa → desactivarla
         if (track.classList.contains('active')) {
             e.preventDefault();
             track.classList.remove('active');
         } else {
-            // Quitar active de las demás
+            // Desactivar las demás
             document.querySelectorAll('.track').forEach(t => t.classList.remove('active'));
-            // Activar la actual
+            // Activar esta
             e.preventDefault();
             track.classList.add('active');
         }

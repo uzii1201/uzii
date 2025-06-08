@@ -52,8 +52,9 @@ h1 {
     justify-content: center;
     align-items: center;
     opacity: 0;
-    transition: opacity 0.5s ease;
+    visibility: hidden;
     pointer-events: none;
+    transition: opacity 0.5s ease, visibility 0s linear 0.5s; /* visibilidad se retrasa al ocultar */
 }
 
 .track .overlay h2 {
@@ -87,7 +88,9 @@ h1 {
 
 .track.active .overlay {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
+    transition: opacity 0.5s ease;
 }
 
 @keyframes fadeIn {

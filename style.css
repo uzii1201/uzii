@@ -10,6 +10,8 @@ body {
 }
 
 h1 {
+    display: block;
+    color: #fff;
     margin-bottom: 40px;
     font-size: 2.5em;
     letter-spacing: 1px;
@@ -30,7 +32,6 @@ h1 {
     overflow: hidden;
     border-radius: 15px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
-    /* quitamos cursor: pointer para evitar confusión en PC */
 }
 
 .track img {
@@ -39,8 +40,6 @@ h1 {
     display: block;
     transition: filter 0.5s ease, transform 0.5s ease;
 }
-
-/* NO USAMOS .track:hover .overlay ni .track:hover img */
 
 .track .overlay {
     position: absolute;
@@ -54,13 +53,14 @@ h1 {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.5s ease, visibility 0s linear 0.5s; /* visibilidad se retrasa al ocultar */
+    transition: opacity 0.5s ease, visibility 0s linear 0.5s;
 }
 
 .track .overlay h2 {
     margin-bottom: 15px;
     font-size: 1.5em;
     color: #f0f0f0;
+    text-align: center;
 }
 
 .track .overlay a {
@@ -98,29 +98,33 @@ h1 {
     to { opacity: 1; transform: translateY(0); }
 }
 
+/* FOOTER ESTILO GENERAL */
 .footer {
-    margin-top: 80px;
+    margin-top: 60px;
     text-align: center;
-    padding: 40px 20px;
-    background-color: #0a0a0a;
-    color: #aaa;
-    border-top: 1px solid #222;
-    animation: fadeIn 2s ease;
-    width: 100%;
+    font-size: 0.95em;
+    color: #ccc;
 }
 
-.social-links {
+/* Enlaces sin heredar color lila ni estilos de navegador */
+.footer a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Íconos SVG: blanco por defecto y gris suave en hover */
+.footer svg {
+    fill: #fff;
+    transition: fill 0.3s ease;
+}
+
+.footer a:hover svg {
+    fill: #bbb;
+}
+
+.footer .social-links {
+    margin-top: 10px;
     display: flex;
     justify-content: center;
-    gap: 25px;
-}
-
-.social-links a svg {
-    fill: #aaa;
-    transition: transform 0.3s ease, fill 0.3s ease;
-}
-
-.social-links a:hover svg {
-    fill: #fff;
-    transform: scale(1.2);
+    gap: 20px;
 }

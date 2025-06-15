@@ -97,3 +97,30 @@ h1 {
     from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+.footer {
+    margin-top: 80px;
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #0a0a0a;
+    color: #aaa;
+    border-top: 1px solid #222;
+    animation: fadeIn 2s ease;
+    width: 100%;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+}
+
+.social-links a svg {
+    fill: #aaa;
+    transition: transform 0.3s ease, fill 0.3s ease;
+}
+
+.social-links a:hover svg {
+    fill: #fff;
+    transform: scale(1.2);
+}

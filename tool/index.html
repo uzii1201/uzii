@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FerluzTools</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<div id="container">
+  <header>
+    <h1>Calculadoras</h1>
+    <button id="toggle-theme">Dark/Light</button>
+  </header>
+  <main>
+    <section class="tool">
+      <h2>Calculadora</h2>
+      <input id="calc-input" placeholder="Ej: 2+2*5" />
+      <button onclick="calcular()">Calcular</button>
+      <p id="calc-result"></p>
+    </section>
+
+    <section class="tool">
+      <h2>Promedio</h2>
+      <input id="average-input" placeholder="Ej: 5, 8, 9" />
+      <button onclick="promediar()">Calcular Promedio</button>
+      <p id="average-result"></p>
+    </section>
+
+    <section class="tool">
+      <h2>Número a Letras</h2>
+      <input id="num-input" placeholder="Ej: 123" />
+      <button onclick="convertirALetras()">Convertir</button>
+      <p id="letras-result"></p>
+    </section>
+
+    <section class="tool">
+      <h2>Porcentaje</h2>
+      <input id="porcentaje-total" placeholder="Total (100%)" />
+      <input id="porcentaje-parte" placeholder="Parte" />
+      <button onclick="calcularPorcentaje()">Calcular %</button>
+      <p id="porcentaje-result"></p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+  </div>
+</body>
+</html>

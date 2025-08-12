@@ -7,8 +7,8 @@ document.querySelectorAll("input").forEach(input => {
   input.addEventListener("input", (e) => {
     const el = e.target;
 
-    // Solo formatear ciertos inputs numéricos
-    const allowed = ["num-input", "porcentaje-total", "porcentaje-parte", "average-input"];
+    // Quitamos "average-input" para que acepte comas
+    const allowed = ["num-input", "porcentaje-total", "porcentaje-parte"];
     if (!allowed.includes(el.id)) return;
 
     let raw = el.value.replace(/\./g, "").replace(/\D/g, "");
@@ -25,8 +25,7 @@ document.querySelectorAll("input").forEach(input => {
 
     if (el.id === "num-input") {
       const letras = numeroALetras(num);
-      const formateado = num.toLocaleString("es-ES");
-      document.getElementById("letras-result").textContent = `Número: ${formateado}\n${letras}\n${letras.toUpperCase()}`;
+      document.getElementById("letras-result").textContent = `${letras}\n${letras.toUpperCase()}`;
     }
   });
 });
@@ -43,7 +42,8 @@ function calcular() {
 
 function promediar() {
   const input = document.getElementById("average-input").value;
-  const nums = input.split(",")
+  const nums = input
+    .split(",")
     .map(n => parseFloat(n.replace(/\./g, "").trim()))
     .filter(n => !isNaN(n));
 

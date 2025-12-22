@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FERLUZ - Sorteo Luminación LED</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --dark-red: #550100;
+            --bright-red: #7a0101;
+            --yellow: #fdfe01;
+            --white: #ffffff;
+            --gray: #f5f5f5;
+            --dark-gray: #333333;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--dark-red);
+            color: var(--white);
+            min-height: 100vh;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--dark-red) 0%, var(--bright-red) 100%);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .logo-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-container {
+            width: 300px;
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+        }
+
+        .logo {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            filter: drop-shadow(0 0 10px rgba(253, 254, 1, 0.5));
+        }
+
+        h1 {
+            color: var(--yellow);
+            font-size: 3rem;
+            margin-bottom: 5px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .subtitle {
+            color: var(--white);
+            font-size: 1.5rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .panel {
+            flex: 1;
+            min-width: 300px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .panel h2 {
+            color: var(--yellow);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--yellow);
+            font-size: 1.8rem;
+        }
+
+        .file-upload {
+            border: 3px dashed var(--yellow);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload:hover {
+            background-color: rgba(253, 254, 1, 0.1);
+        }
+
+        .file-upload i {
+            font-size: 3rem;
+            color: var(--yellow);
+            margin-bottom: 15px;
+        }
+
+        .file-upload p {
+            color: var(--white);
+            font-size: 1.2rem;
+        }
+
+        .file-info {
+            background-color: rgba(253, 254, 1, 0.2);
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+            border: 1px solid var(--yellow);
+        }
+
+        .file-info.show {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .participant-count {
+            font-weight: bold;
+            color: var(--yellow);
+            font-size: 1.3rem;
+        }
+
+        .coupon-total {
+            font-weight: bold;
+            color: var(--yellow);
+            font-size: 1.3rem;
+        }
+
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 25px;
+        }
+
+        button {
+            padding: 18px 30px;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .primary-btn {
+            background-color: var(--yellow);
+            color: var(--dark-red);
+        }
+
+        .primary-btn:hover {
+            background-color: var(--white);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .secondary-btn {
+            background-color: var(--bright-red);
+            color: var(--white);
+            border: 2px solid var(--yellow);
+        }
+
+        .secondary-btn:hover {
+            background-color: var(--dark-red);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .roulette-section {
+            flex: 2;
+            min-width: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .roulette-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .roulette-display {
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            border: 15px solid var(--yellow);
+            box-shadow: 
+                0 0 30px rgba(253, 254, 1, 0.5),
+                inset 0 0 50px rgba(0, 0, 0, 0.5);
+            margin: 20px 0;
+            background: linear-gradient(135deg, var(--bright-red) 0%, var(--dark-red) 100%);
+        }
+
+        .roulette-inner {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .roulette-name-display {
+            position: absolute;
+            width: 80%;
+            height: 80%;
+            border-radius: 50%;
+            background-color: rgba(85, 1, 0, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            border: 10px solid var(--yellow);
+            box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.7);
+        }
+
+        .current-name {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--yellow);
+            text-align: center;
+            padding: 20px;
+            text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.8);
+            transition: all 0.1s ease;
+        }
+
+        .winner-name-display {
+            font-size: 4.5rem;
+            font-weight: bold;
+            color: var(--white);
+            text-align: center;
+            text-shadow: 
+                0 0 20px var(--yellow),
+                0 0 40px var(--yellow);
+            animation: winnerGlow 1.5s infinite alternate;
+        }
+
+        .roulette-border {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(
+                var(--dark-red) 0deg 90deg,
+                var(--bright-red) 90deg 180deg,
+                var(--dark-red) 180deg 270deg,
+                var(--bright-red) 270deg 360deg
+            );
+            opacity: 0.7;
+        }
+
+        .roulette-pointer {
+            position: absolute;
+            top: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 60px;
+            z-index: 100;
+        }
+
+        .roulette-pointer:before {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-top: 50px solid var(--yellow);
+            filter: drop-shadow(0 5px 10px rgba(0, 0, 0, 0.5));
+        }
+
+        .winner-display {
+            text-align: center;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--dark-red) 0%, var(--bright-red) 100%);
+            border-radius: 15px;
+            color: var(--white);
+            margin-top: 30px;
+            display: none;
+            animation: fadeIn 1s ease;
+            border: 5px solid var(--yellow);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .winner-display.show {
+            display: block;
+        }
+
+        .winner-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--yellow);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .winner-coupons {
+            font-size: 2rem;
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 15px 30px;
+            border-radius: 10px;
+            display: inline-block;
+            margin-top: 10px;
+            color: var(--yellow);
+            font-weight: bold;
+        }
+
+        .participants-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid rgba(253, 254, 1, 0.3);
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+
+        .participant-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(253, 254, 1, 0.2);
+            display: flex;
+            justify-content: space-between;
+            transition: all 0.3s ease;
+        }
+
+        .participant-item:hover {
+            background-color: rgba(253, 254, 1, 0.1);
+        }
+
+        .participant-item:last-child {
+            border-bottom: none;
+        }
+
+        .participant-name {
+            font-weight: 500;
+            flex: 2;
+        }
+
+        .participant-coupons {
+            color: var(--yellow);
+            font-weight: bold;
+            flex: 1;
+            text-align: right;
+        }
+
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 6px solid rgba(253, 254, 1, 0.3);
+            border-top: 6px solid var(--yellow);
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes winnerGlow {
+            from { 
+                text-shadow: 
+                    0 0 20px var(--yellow),
+                    0 0 40px var(--yellow);
+                transform: scale(1);
+            }
+            to { 
+                text-shadow: 
+                    0 0 30px var(--yellow),
+                    0 0 60px var(--yellow),
+                    0 0 80px var(--yellow);
+                transform: scale(1.05);
+            }
+        }
+
+        @keyframes nameFlash {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .stats-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+            padding: 10px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            border: 1px solid rgba(253, 254, 1, 0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--yellow);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 1200px) {
+            .roulette-display {
+                width: 500px;
+                height: 500px;
+            }
+            
+            .current-name {
+                font-size: 2.8rem;
+            }
+            
+            .winner-name-display {
+                font-size: 3.5rem;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .roulette-section {
+                order: -1;
+            }
+            
+            .roulette-display {
+                width: 400px;
+                height: 400px;
+            }
+            
+            .current-name {
+                font-size: 2.2rem;
+            }
+            
+            .winner-name-display {
+                font-size: 2.8rem;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .panel {
+                min-width: 100%;
+            }
+            
+            .logo-container {
+                width: 250px;
+                height: 125px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .roulette-display {
+                width: 320px;
+                height: 320px;
+                border-width: 10px;
+            }
+            
+            .current-name {
+                font-size: 1.8rem;
+            }
+            
+            .winner-name-display {
+                font-size: 2.2rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            button {
+                min-width: 100%;
+                padding: 15px;
+            }
+            
+            .winner-title {
+                font-size: 1.8rem;
+            }
+            
+            .stats-container {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .logo-container {
+                width: 200px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo-section">
+                <!-- Logo FERLUZ -->
+                <div class="logo-container">
+                    <img src="https://via.placeholder.com/300x150/ffffff/550100?text=Logo-FERLUZ-Blanco.webp" 
+                         alt="FERLUZ Luminación LED" 
+                         class="logo"
+                         onerror="this.onerror=null; this.src='https://via.placeholder.com/300x150/ffffff/550100?text=FERLUZ+LED';">
+                </div>
+                <h1>SORTEO DE CUPONES</h1>
+                <div class="subtitle">Más cupones = Más probabilidades de ganar</div>
+            </div>
+        </header>
+
+        <div class="main-content">
+            <div class="panel">
+                <h2><i class="fas fa-users"></i> Participantes</h2>
+                <div class="file-upload" id="fileUpload">
+                    <i class="fas fa-file-excel"></i>
+                    <p>Haz clic o arrastra tu archivo Excel aquí</p>
+                    <p><small>Columna A: Nombres de clientes | Columna B: Cantidad de cupones</small></p>
+                </div>
+                <input type="file" id="excelInput" accept=".xlsx, .xls" style="display: none;">
+                
+                <div class="file-info" id="fileInfo">
+                    <p><i class="fas fa-check-circle"></i> Archivo cargado correctamente</p>
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <div class="stat-value" id="participantCount">0</div>
+                            <div class="stat-label">Participantes</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-value" id="totalCoupons">0</div>
+                            <div class="stat-label">Cupones totales</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="participants-list" id="participantsList">
+                    <!-- Lista de participantes se cargará aquí -->
+                </div>
+                
+                <div class="controls">
+                    <button class="primary-btn" id="startBtn" disabled>
+                        <i class="fas fa-play"></i> Iniciar Sorteo
+                    </button>
+                    <button class="secondary-btn" id="resetBtn" disabled>
+                        <i class="fas fa-redo"></i> Reiniciar
+                    </button>
+                </div>
+            </div>
+            
+            <div class="panel roulette-section">
+                <h2><i class="fas fa-trophy"></i> Ruleta del Sorteo</h2>
+                
+                <div class="roulette-container">
+                    <div class="roulette-pointer"></div>
+                    <div class="roulette-display">
+                        <div class="roulette-border"></div>
+                        <div class="roulette-inner">
+                            <div class="roulette-name-display">
+                                <div class="current-name" id="currentName">Esperando participantes...</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="loading" id="loading">
+                    <div class="spinner"></div>
+                    <p>¡El sorteo está en marcha!</p>
+                </div>
+                
+                <div class="winner-display" id="winnerDisplay">
+                    <div class="winner-title">¡FELICIDADES!</div>
+                    <div class="winner-name-display" id="winnerName">Nombre del Ganador</div>
+                    <div>Cupones que tenía: <span class="winner-coupons" id="winnerCoupons">0</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos DOM
+            const excelInput = document.getElementById('excelInput');
+            const fileUpload = document.getElementById('fileUpload');
+            const fileInfo = document.getElementById('fileInfo');
+            const participantCount = document.getElementById('participantCount');
+            const totalCoupons = document.getElementById('totalCoupons');
+            const participantsList = document.getElementById('participantsList');
+            const startBtn = document.getElementById('startBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const currentName = document.getElementById('currentName');
+            const loading = document.getElementById('loading');
+            const winnerDisplay = document.getElementById('winnerDisplay');
+            const winnerName = document.getElementById('winnerName');
+            const winnerCoupons = document.getElementById('winnerCoupons');
+            
+            // Variables globales
+            let participants = [];
+            let weightedParticipants = []; // Lista ponderada por cupones
+            let winnerIndex = -1;
+            let isSpinning = false;
+            let nameInterval = null;
+            let spinSpeed = 50;
+            let finalSpinDuration = 3000;
+            let totalCouponCount = 0;
+            
+            // Cargar archivo Excel
+            fileUpload.addEventListener('click', function() {
+                excelInput.click();
+            });
+            
+            excelInput.addEventListener('change', function(e) {
+                if (e.target.files && e.target.files[0]) {
+                    loadExcelFile(e.target.files[0]);
+                }
+            });
+            
+            // Permitir arrastrar y soltar archivos
+            fileUpload.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                fileUpload.style.backgroundColor = 'rgba(253, 254, 1, 0.1)';
+            });
+            
+            fileUpload.addEventListener('dragleave', function() {
+                fileUpload.style.backgroundColor = '';
+            });
+            
+            fileUpload.addEventListener('drop', function(e) {
+                e.preventDefault();
+                fileUpload.style.backgroundColor = '';
+                
+                if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                    const file = e.dataTransfer.files[0];
+                    if (file.name.match(/\.(xlsx|xls)$/)) {
+                        loadExcelFile(file);
+                    } else {
+                        alert('Por favor, sube un archivo Excel válido (.xlsx o .xls)');
+                    }
+                }
+            });
+            
+            // Función para cargar archivo Excel
+            function loadExcelFile(file) {
+                const reader = new FileReader();
+                
+                reader.onload = function(event) {
+                    try {
+                        const data = new Uint8Array(event.target.result);
+                        const workbook = XLSX.read(data, { type: 'array' });
+                        const firstSheet = workbook.Sheets[workbook.SheetNames[0]];
+                        
+                        // Convertir a JSON
+                        const jsonData = XLSX.utils.sheet_to_json(firstSheet, { header: 1 });
+                        
+                        // Limpiar datos anteriores
+                        participants = [];
+                        weightedParticipants = [];
+                        totalCouponCount = 0;
+                        
+                        // Procesar filas (empezando desde la fila 1 para omitir encabezados)
+                        for (let i = 1; i < jsonData.length; i++) {
+                            const row = jsonData[i];
+                            if (row && row.length >= 2 && row[0]) {
+                                const name = row[0].toString().trim();
+                                let couponCount = 1; // Valor por defecto si no hay número
+                                
+                                // Intentar convertir la segunda columna a número
+                                if (row[1] !== undefined && row[1] !== null && row[1] !== '') {
+                                    const couponValue = parseInt(row[1]);
+                                    if (!isNaN(couponValue) && couponValue > 0) {
+                                        couponCount = couponValue;
+                                    }
+                                }
+                                
+                                participants.push({
+                                    name: name,
+                                    coupons: couponCount
+                                });
+                                
+                                totalCouponCount += couponCount;
+                            }
+                        }
+                        
+                        // Crear lista ponderada para el sorteo
+                        createWeightedParticipantsList();
+                        
+                        // Actualizar interfaz
+                        updateParticipantsUI();
+                        
+                        // Mostrar información del archivo
+                        fileInfo.classList.add('show');
+                        participantCount.textContent = participants.length;
+                        totalCoupons.textContent = totalCouponCount;
+                        
+                        // Habilitar botones
+                        startBtn.disabled = participants.length === 0;
+                        resetBtn.disabled = participants.length === 0;
+                        
+                        // Mostrar el primer nombre en la ruleta
+                        if (participants.length > 0) {
+                            currentName.textContent = participants[0].name;
+                        }
+                        
+                    } catch (error) {
+                        console.error('Error al procesar el archivo Excel:', error);
+                        alert('Error al procesar el archivo Excel. Por favor, verifica el formato.');
+                    }
+                };
+                
+                reader.readAsArrayBuffer(file);
+            }
+            
+            // Crear lista ponderada por cantidad de cupones
+            function createWeightedParticipantsList() {
+                weightedParticipants = [];
+                
+                for (let i = 0; i < participants.length; i++) {
+                    const participant = participants[i];
+                    // Agregar el participante tantas veces como cupones tenga
+                    for (let j = 0; j < participant.coupons; j++) {
+                        weightedParticipants.push({
+                            name: participant.name,
+                            coupons: participant.coupons,
+                            originalIndex: i
+                        });
+                    }
+                }
+            }
+            
+            // Actualizar lista de participantes en la UI
+            function updateParticipantsUI() {
+                participantsList.innerHTML = '';
+                
+                if (participants.length === 0) {
+                    participantsList.innerHTML = '<p style="text-align: center; color: var(--yellow); padding: 20px;">No hay participantes cargados</p>';
+                    return;
+                }
+                
+                // Ordenar por cantidad de cupones (mayor a menor)
+                const sortedParticipants = [...participants].sort((a, b) => b.coupons - a.coupons);
+                
+                // Mostrar máximo 10 participantes en la lista
+                const displayCount = Math.min(sortedParticipants.length, 10);
+                
+                for (let i = 0; i < displayCount; i++) {
+                    const participant = sortedParticipants[i];
+                    const div = document.createElement('div');
+                    div.className = 'participant-item';
+                    div.innerHTML = `
+                        <span class="participant-name">${participant.name}</span>
+                        <span class="participant-coupons">${participant.coupons} cupón${participant.coupons !== 1 ? 'es' : ''}</span>
+                    `;
+                    participantsList.appendChild(div);
+                }
+                
+                if (sortedParticipants.length > 10) {
+                    const moreDiv = document.createElement('div');
+                    moreDiv.className = 'participant-item';
+                    moreDiv.style.textAlign = 'center';
+                    moreDiv.style.fontStyle = 'italic';
+                    moreDiv.textContent = `... y ${sortedParticipants.length - 10} participantes más`;
+                    participantsList.appendChild(moreDiv);
+                }
+            }
+            
+            // Iniciar animación de desfile de nombres
+            function startNameParade() {
+                let currentIndex = 0;
+                
+                // Limpiar intervalo anterior si existe
+                if (nameInterval) clearInterval(nameInterval);
+                
+                nameInterval = setInterval(function() {
+                    // Usar la lista ponderada para el desfile
+                    const currentParticipant = weightedParticipants[currentIndex];
+                    currentName.textContent = currentParticipant.name;
+                    currentName.style.animation = 'nameFlash 0.2s';
+                    
+                    // Eliminar la animación después de que termine
+                    setTimeout(() => {
+                        currentName.style.animation = '';
+                    }, 200);
+                    
+                    currentIndex = (currentIndex + 1) % weightedParticipants.length;
+                }, spinSpeed);
+                
+                return nameInterval;
+            }
+            
+            // Función para acelerar el desfile de nombres
+            function accelerateNameParade(interval) {
+                if (spinSpeed > 10) {
+                    spinSpeed -= 5;
+                    clearInterval(interval);
+                    return startNameParade();
+                }
+                return interval;
+            }
+            
+            // Detener el desfile de nombres
+            function stopNameParade() {
+                if (nameInterval) {
+                    clearInterval(nameInterval);
+                    nameInterval = null;
+                }
+            }
+            
+            // Iniciar sorteo
+            startBtn.addEventListener('click', function() {
+                if (isSpinning || participants.length === 0) return;
+                
+                isSpinning = true;
+                startBtn.disabled = true;
+                resetBtn.disabled = true;
+                loading.classList.add('show');
+                winnerDisplay.classList.remove('show');
+                
+                // Elegir ganador aleatorio de la lista ponderada
+                winnerIndex = Math.floor(Math.random() * weightedParticipants.length);
+                const weightedWinner = weightedParticipants[winnerIndex];
+                const winner = participants[weightedWinner.originalIndex];
+                
+                // Iniciar desfile de nombres
+                spinSpeed = 80;
+                let paradeInterval = startNameParade();
+                
+                // Función para desacelerar y detenerse en el ganador
+                const slowDownInterval = setInterval(function() {
+                    paradeInterval = accelerateNameParade(paradeInterval);
+                }, 500);
+                
+                // Detener el desfile en el ganador después de un tiempo
+                setTimeout(function() {
+                    clearInterval(slowDownInterval);
+                    stopNameParade();
+                    
+                    // Mostrar el ganador en la ruleta
+                    currentName.innerHTML = `<div class="winner-name-display">${winner.name}</div>`;
+                    
+                    // Mostrar información del ganador
+                    setTimeout(function() {
+                        loading.classList.remove('show');
+                        winnerName.textContent = winner.name;
+                        winnerCoupons.textContent = winner.coupons;
+                        winnerDisplay.classList.add('show');
+                        isSpinning = false;
+                        startBtn.disabled = false;
+                        resetBtn.disabled = false;
+                    }, 1000);
+                    
+                }, finalSpinDuration);
+            });
+            
+            // Reiniciar
+            resetBtn.addEventListener('click', function() {
+                participants = [];
+                weightedParticipants = [];
+                winnerIndex = -1;
+                isSpinning = false;
+                totalCouponCount = 0;
+                stopNameParade();
+                
+                fileInfo.classList.remove('show');
+                participantCount.textContent = '0';
+                totalCoupons.textContent = '0';
+                winnerDisplay.classList.remove('show');
+                currentName.textContent = 'Esperando participantes...';
+                currentName.className = 'current-name';
+                
+                updateParticipantsUI();
+                startBtn.disabled = true;
+                resetBtn.disabled = true;
+                
+                excelInput.value = '';
+            });
+            
+            // Crear datos de ejemplo para demostración
+            function createSampleData() {
+                const sampleParticipants = [
+                    { name: "Ana García López", coupons: 5 },
+                    { name: "Carlos Rodríguez", coupons: 3 },
+                    { name: "María Fernández", coupons: 10 },
+                    { name: "José Martínez Pérez", coupons: 1 },
+                    { name: "Laura González Sánchez", coupons: 7 },
+                    { name: "Miguel Torres Díaz", coupons: 2 },
+                    { name: "Sofía Ramírez Ruiz", coupons: 4 },
+                    { name: "David Hernández Castro", coupons: 8 },
+                    { name: "Elena Navarro Jiménez", coupons: 6 },
+                    { name: "Javier Morales Ortiz", coupons: 3 },
+                    { name: "Carmen Romero Silva", coupons: 9 },
+                    { name: "Francisco Vargas Rojas", coupons: 2 },
+                    { name: "Isabel Mendoza Cruz", coupons: 5 },
+                    { name: "Ricardo Peña Flores", coupons: 1 },
+                    { name: "Patricia Soto Castillo", coupons: 12 }
+                ];
+                
+                participants = sampleParticipants;
+                totalCouponCount = participants.reduce((sum, p) => sum + p.coupons, 0);
+                createWeightedParticipantsList();
+                updateParticipantsUI();
+                
+                fileInfo.classList.add('show');
+                participantCount.textContent = participants.length;
+                totalCoupons.textContent = totalCouponCount;
+                
+                startBtn.disabled = false;
+                resetBtn.disabled = false;
+                
+                // Mostrar el primer nombre en la ruleta
+                currentName.textContent = participants[0].name;
+            }
+            
+            // Para propósitos de demostración, cargar datos de ejemplo
+            createSampleData();
+            
+            // Reemplazar placeholder con logo real si está disponible
+            function loadRealLogo() {
+                const logoImg = document.querySelector('.logo');
+                // Intenta cargar el logo desde la ruta local
+                logoImg.src = 'Logo-FERLUZ-Blanco.webp';
+            }
+            
+            // Intentar cargar el logo real
+            loadRealLogo();
+        });
+    </script>
+</body>
+</html>

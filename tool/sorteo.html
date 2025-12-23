@@ -28,11 +28,14 @@
             min-height: 100vh;
             padding: 20px;
             background: linear-gradient(135deg, var(--dark-red) 0%, var(--bright-red) 100%);
+            overflow-x: hidden;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
+            position: relative;
+            z-index: 10;
         }
 
         header {
@@ -272,6 +275,17 @@
             transition: all 0.1s ease;
         }
 
+        .countdown-display {
+            font-size: 7rem;
+            font-weight: bold;
+            color: var(--yellow);
+            text-align: center;
+            text-shadow: 
+                0 0 20px var(--yellow),
+                0 0 40px var(--yellow);
+            animation: pulse 1s infinite;
+        }
+
         .winner-name-display {
             font-size: 4.5rem;
             font-weight: bold;
@@ -329,6 +343,8 @@
             animation: fadeIn 1s ease;
             border: 5px solid var(--yellow);
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 20;
         }
 
         .winner-display.show {
@@ -412,6 +428,43 @@
             margin: 0 auto 20px;
         }
 
+        /* Estilos para el confeti */
+        .confetti-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 5;
+            overflow: hidden;
+        }
+
+        .confetti {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: var(--yellow);
+            top: -20px;
+            opacity: 0.8;
+        }
+
+        .confetti:nth-child(odd) {
+            background-color: var(--white);
+        }
+
+        .confetti:nth-child(even) {
+            background-color: var(--yellow);
+        }
+
+        .confetti:nth-child(3n) {
+            background-color: var(--bright-red);
+        }
+
+        .confetti:nth-child(4n) {
+            background-color: var(--dark-red);
+        }
+
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
@@ -438,9 +491,41 @@
             }
         }
 
-        @keyframes nameFlash {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.7; }
+        @keyframes pulse {
+            0%, 100% { 
+                transform: scale(1);
+                text-shadow: 
+                    0 0 20px var(--yellow),
+                    0 0 40px var(--yellow);
+            }
+            50% { 
+                transform: scale(1.1);
+                text-shadow: 
+                    0 0 30px var(--yellow),
+                    0 0 60px var(--yellow);
+            }
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes confetti-fall-2 {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh) rotate(-360deg);
+                opacity: 0;
+            }
         }
 
         .stats-container {
@@ -479,6 +564,10 @@
                 font-size: 2.8rem;
             }
             
+            .countdown-display {
+                font-size: 6rem;
+            }
+            
             .winner-name-display {
                 font-size: 3.5rem;
             }
@@ -500,6 +589,10 @@
             
             .current-name {
                 font-size: 2.2rem;
+            }
+            
+            .countdown-display {
+                font-size: 5rem;
             }
             
             .winner-name-display {
@@ -529,6 +622,10 @@
             
             .current-name {
                 font-size: 1.8rem;
+            }
+            
+            .countdown-display {
+                font-size: 4rem;
             }
             
             .winner-name-display {
@@ -561,12 +658,15 @@
     </style>
 </head>
 <body>
+    <!-- Contenedor para confeti -->
+    <div class="confetti-container" id="confettiContainer"></div>
+    
     <div class="container">
         <header>
             <div class="logo-section">
                 <!-- Logo FERLUZ -->
                 <div class="logo-container">
-                    <img src="https://via.placeholder.com/300x150/ffffff/550100?text=Logo-FERLUZ-Blanco.webp" 
+                    <img src="Logo-FERLUZ-Blanco.webp" 
                          alt="FERLUZ Luminación LED" 
                          class="logo"
                          onerror="this.onerror=null; this.src='https://via.placeholder.com/300x150/ffffff/550100?text=FERLUZ+LED';">
@@ -631,7 +731,7 @@
                 
                 <div class="loading" id="loading">
                     <div class="spinner"></div>
-                    <p>¡El sorteo está en marcha!</p>
+                    <p>¡Preparando el sorteo!</p>
                 </div>
                 
                 <div class="winner-display" id="winnerDisplay">
@@ -660,15 +760,14 @@
             const winnerDisplay = document.getElementById('winnerDisplay');
             const winnerName = document.getElementById('winnerName');
             const winnerCoupons = document.getElementById('winnerCoupons');
+            const confettiContainer = document.getElementById('confettiContainer');
             
             // Variables globales
             let participants = [];
             let weightedParticipants = []; // Lista ponderada por cupones
             let winnerIndex = -1;
             let isSpinning = false;
-            let nameInterval = null;
-            let spinSpeed = 50;
-            let finalSpinDuration = 3000;
+            let countdownInterval = null;
             let totalCouponCount = 0;
             
             // Cargar archivo Excel
@@ -830,46 +929,67 @@
                 }
             }
             
-            // Iniciar animación de desfile de nombres
-            function startNameParade() {
-                let currentIndex = 0;
+            // Iniciar cuenta atrás
+            function startCountdown() {
+                let countdown = 5; // Comenzar desde 5
                 
                 // Limpiar intervalo anterior si existe
-                if (nameInterval) clearInterval(nameInterval);
+                if (countdownInterval) clearInterval(countdownInterval);
                 
-                nameInterval = setInterval(function() {
-                    // Usar la lista ponderada para el desfile
-                    const currentParticipant = weightedParticipants[currentIndex];
-                    currentName.textContent = currentParticipant.name;
-                    currentName.style.animation = 'nameFlash 0.2s';
-                    
-                    // Eliminar la animación después de que termine
-                    setTimeout(() => {
-                        currentName.style.animation = '';
-                    }, 200);
-                    
-                    currentIndex = (currentIndex + 1) % weightedParticipants.length;
-                }, spinSpeed);
+                // Cambiar a modo cuenta atrás
+                currentName.innerHTML = `<div class="countdown-display">${countdown}</div>`;
                 
-                return nameInterval;
+                countdownInterval = setInterval(function() {
+                    countdown--;
+                    
+                    if (countdown > 0) {
+                        currentName.innerHTML = `<div class="countdown-display">${countdown}</div>`;
+                    } else {
+                        clearInterval(countdownInterval);
+                        currentName.innerHTML = `<div class="countdown-display">!</div>`;
+                    }
+                }, 800); // Intervalo de 0.8 segundos
+                
+                return countdownInterval;
             }
             
-            // Función para acelerar el desfile de nombres
-            function accelerateNameParade(interval) {
-                if (spinSpeed > 10) {
-                    spinSpeed -= 5;
-                    clearInterval(interval);
-                    return startNameParade();
+            // Crear efecto de confeti
+            function createConfetti() {
+                // Limpiar confeti anterior
+                confettiContainer.innerHTML = '';
+                
+                // Crear 150 piezas de confeti
+                for (let i = 0; i < 150; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    
+                    // Posición aleatoria en la parte superior
+                    confetti.style.left = `${Math.random() * 100}vw`;
+                    
+                    // Tamaño aleatorio
+                    const size = Math.random() * 15 + 5;
+                    confetti.style.width = `${size}px`;
+                    confetti.style.height = `${size}px`;
+                    
+                    // Forma aleatoria (algunos serán círculos)
+                    if (Math.random() > 0.5) {
+                        confetti.style.borderRadius = '50%';
+                    }
+                    
+                    // Animación aleatoria
+                    const animationDuration = Math.random() * 3 + 2;
+                    const animationDelay = Math.random() * 2;
+                    const animationType = Math.random() > 0.5 ? 'confetti-fall' : 'confetti-fall-2';
+                    
+                    confetti.style.animation = `${animationType} ${animationDuration}s ease-in ${animationDelay}s forwards`;
+                    
+                    confettiContainer.appendChild(confetti);
                 }
-                return interval;
-            }
-            
-            // Detener el desfile de nombres
-            function stopNameParade() {
-                if (nameInterval) {
-                    clearInterval(nameInterval);
-                    nameInterval = null;
-                }
+                
+                // Eliminar confeti después de 5 segundos
+                setTimeout(() => {
+                    confettiContainer.innerHTML = '';
+                }, 5000);
             }
             
             // Iniciar sorteo
@@ -887,35 +1007,28 @@
                 const weightedWinner = weightedParticipants[winnerIndex];
                 const winner = participants[weightedWinner.originalIndex];
                 
-                // Iniciar desfile de nombres
-                spinSpeed = 80;
-                let paradeInterval = startNameParade();
+                // Iniciar cuenta atrás
+                startCountdown();
                 
-                // Función para desacelerar y detenerse en el ganador
-                const slowDownInterval = setInterval(function() {
-                    paradeInterval = accelerateNameParade(paradeInterval);
-                }, 500);
-                
-                // Detener el desfile en el ganador después de un tiempo
+                // Después de la cuenta atrás, mostrar el ganador
                 setTimeout(function() {
-                    clearInterval(slowDownInterval);
-                    stopNameParade();
+                    loading.classList.remove('show');
                     
                     // Mostrar el ganador en la ruleta
                     currentName.innerHTML = `<div class="winner-name-display">${winner.name}</div>`;
                     
                     // Mostrar información del ganador
-                    setTimeout(function() {
-                        loading.classList.remove('show');
-                        winnerName.textContent = winner.name;
-                        winnerCoupons.textContent = winner.coupons;
-                        winnerDisplay.classList.add('show');
-                        isSpinning = false;
-                        startBtn.disabled = false;
-                        resetBtn.disabled = false;
-                    }, 1000);
+                    winnerName.textContent = winner.name;
+                    winnerCoupons.textContent = winner.coupons;
+                    winnerDisplay.classList.add('show');
                     
-                }, finalSpinDuration);
+                    // Crear efecto de confeti
+                    createConfetti();
+                    
+                    isSpinning = false;
+                    startBtn.disabled = false;
+                    resetBtn.disabled = false;
+                }, 5000); // 5 segundos de cuenta atrás
             });
             
             // Reiniciar
@@ -925,7 +1038,11 @@
                 winnerIndex = -1;
                 isSpinning = false;
                 totalCouponCount = 0;
-                stopNameParade();
+                
+                if (countdownInterval) {
+                    clearInterval(countdownInterval);
+                    countdownInterval = null;
+                }
                 
                 fileInfo.classList.remove('show');
                 participantCount.textContent = '0';
@@ -933,6 +1050,9 @@
                 winnerDisplay.classList.remove('show');
                 currentName.textContent = 'Esperando participantes...';
                 currentName.className = 'current-name';
+                
+                // Limpiar confeti
+                confettiContainer.innerHTML = '';
                 
                 updateParticipantsUI();
                 startBtn.disabled = true;

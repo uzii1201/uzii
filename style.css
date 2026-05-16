@@ -1,130 +1,332 @@
-body {
+/* ========== FRUTIGER AERO - BOTONES UNIFICADOS ========== */
+* {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0d0d0d;
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 40px 20px;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-h1 {
-    display: block;
-    color: #fff;
-    margin-bottom: 40px;
-    font-size: 2.5em;
-    letter-spacing: 1px;
-    animation: fadeIn 1s ease;
+body {
+    font-family: 'Inter', 'Segoe UI', 'Helvetica Neue', sans-serif;
+    background: linear-gradient(145deg, #0a1a2a 0%, #061220 50%, #030a14 100%);
+    min-height: 100vh;
+    padding: 40px 24px;
+    position: relative;
+    overflow-x: hidden;
 }
 
+.aurora-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at 30% 40%, rgba(0, 100, 120, 0.2) 0%, rgba(0, 50, 80, 0.3) 60%, transparent);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 10;
+}
+
+/* ========== HEADER GLOSSY ESTILO NEÓN ========== */
+.frutiger-header {
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.logo-gloss {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 30px;
+    padding: 10px 30px;
+    border-radius: 80px;
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(0, 255, 255, 0.4);
+}
+
+.glass-title {
+    font-size: clamp(3.5rem, 12vw, 6.5rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, #ffffff, #00ffff, #ff00ff, #ffffff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    text-shadow: 0 0 30px rgba(0, 255, 255, 0.8), 0 0 15px rgba(255, 0, 255, 0.5);
+    letter-spacing: -0.02em;
+    position: relative;
+    animation: neonPulse 2s ease-in-out infinite;
+}
+
+@keyframes neonPulse {
+    0% { text-shadow: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 10px rgba(255, 0, 255, 0.4); }
+    50% { text-shadow: 0 0 40px rgba(0, 255, 255, 1), 0 0 20px rgba(255, 0, 255, 0.8); }
+    100% { text-shadow: 0 0 20px rgba(0, 255, 255, 0.6), 0 0 10px rgba(255, 0, 255, 0.4); }
+}
+
+.shine {
+    position: absolute;
+    top: -20px;
+    left: -150%;
+    width: 100%;
+    height: calc(100% + 40px);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), rgba(0, 255, 255, 0.4), transparent);
+    animation: shineMove 8s infinite;
+    pointer-events: none;
+    border-radius: 80px;
+}
+
+@keyframes shineMove {
+    0% { left: -150%; opacity: 0; }
+    10% { opacity: 1; }
+    30% { left: 150%; opacity: 0; }
+    100% { left: 150%; opacity: 0; }
+}
+
+.aero-divider {
+    width: 200px;
+    margin: 0 auto;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, #00ffff, #ff00ff, #ffb56b, #3bc0ff, transparent);
+    border-radius: 4px;
+    position: relative;
+    box-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+}
+
+.divider-glow {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse, #00ffff, #ff00ff, transparent);
+    filter: blur(5px);
+}
+
+/* ========== GALERIA ========== */
 .gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 30px;
-    width: 100%;
-    max-width: 1200px;
-    animation: fadeIn 1.5s ease;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 40px;
+    margin-bottom: 50px;
 }
 
 .track {
-    position: relative;
+    background: rgba(8, 20, 30, 0.85);
+    backdrop-filter: blur(16px);
+    border-radius: 32px;
     overflow: hidden;
-    border-radius: 15px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+    box-shadow: 0 20px 35px -12px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    transition: all 0.3s ease;
 }
 
-.track img {
+.track:hover {
+    transform: translateY(-8px);
+    background: rgba(15, 35, 50, 0.9);
+    box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.6), 0 0 0 2px rgba(0, 255, 255, 0.4);
+    border-color: rgba(0, 255, 255, 0.6);
+}
+
+.cover-wrapper {
+    position: relative;
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: #030e14;
+}
+
+.cover-img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
     display: block;
-    transition: filter 0.5s ease, transform 0.5s ease;
 }
 
-.track .overlay {
+.track:hover .cover-img {
+    transform: scale(1.03);
+}
+
+.glare-effect {
     position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    opacity: 0;
-    visibility: hidden;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    transition: left 0.5s;
     pointer-events: none;
-    transition: opacity 0.5s ease, visibility 0s linear 0.5s;
 }
 
-.track .overlay h2 {
-    margin-bottom: 15px;
-    font-size: 1.5em;
-    color: #f0f0f0;
-    text-align: center;
+.track:hover .glare-effect {
+    left: 100%;
 }
 
-.track .overlay a {
-    display: inline-block;
-    margin: 8px 0;
-    padding: 10px 20px;
-    background: #333;
-    color: #fff;
+.track-content {
+    padding: 22px 20px 26px;
+    background: linear-gradient(135deg, rgba(15, 35, 50, 0.7), rgba(8, 22, 32, 0.9));
+}
+
+.track-content h2 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 18px;
+    letter-spacing: -0.3px;
+    background: linear-gradient(135deg, #ffffff, #ffd699, #ffaa66, #7ad0f5);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.platform-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+}
+
+/* BOTONES UNIFICADOS - todos iguales, sin colores distintos */
+.btn-aero {
+    display: inline-flex;
+    align-items: center;
+    padding: 8px 18px;
+    border-radius: 40px;
     text-decoration: none;
-    border-radius: 8px;
-    font-size: 1.1em;
-    transition: background 0.3s, transform 0.2s;
-    pointer-events: auto;
+    font-weight: 600;
+    font-size: 0.75rem;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(4px);
+    border: 1px solid rgba(0, 255, 255, 0.5);
+    color: #e0f4ff;
+    transition: all 0.2s ease;
+    letter-spacing: 0.3px;
 }
 
-.track .overlay a:hover {
-    background: #555;
-    transform: scale(1.05);
+.btn-aero:hover {
+    transform: scale(0.97);
+    background: rgba(0, 255, 255, 0.25);
+    border-color: #00ffff;
+    color: white;
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.4);
 }
 
-.track.active img {
-    filter: blur(5px) brightness(0.7);
-    transform: scale(1.05);
-}
-
-.track.active .overlay {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transition: opacity 0.5s ease;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* FOOTER ESTILO GENERAL */
-.footer {
-    margin-top: 60px;
+/* ========== FOOTER ========== */
+.footer-aero {
     text-align: center;
-    font-size: 0.95em;
-    color: #ccc;
+    margin-top: 40px;
+    padding: 30px 20px 25px;
+    background: rgba(5, 20, 30, 0.8);
+    backdrop-filter: blur(20px);
+    border-radius: 80px;
+    border: 1px solid rgba(0, 255, 255, 0.3);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.15);
 }
 
-/* Enlaces sin heredar color lila ni estilos de navegador */
-.footer a {
-    color: inherit;
-    text-decoration: none;
-}
-
-/* Íconos SVG: blanco por defecto y gris suave en hover */
-.footer svg {
-    fill: #fff;
-    transition: fill 0.3s ease;
-}
-
-.footer a:hover svg {
-    fill: #bbb;
-}
-
-.footer .social-links {
-    margin-top: 10px;
+.social-wave {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 35px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+/* Iconos sociales - todos iguales, sin colores distintos al hover */
+.social-circle {
+    background: rgba(15, 45, 65, 0.8);
+    backdrop-filter: blur(8px);
+    width: 52px;
+    height: 52px;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #b8e2f5;
+    transition: all 0.2s ease;
+    border: 1px solid rgba(0, 255, 255, 0.4);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.social-circle svg {
+    fill: #b8e2f5;
+    transition: fill 0.2s;
+}
+
+.social-circle:hover {
+    transform: translateY(-5px);
+    background: rgba(0, 255, 255, 0.2);
+    border-color: #00ffff;
+    color: white;
+}
+
+.social-circle:hover svg {
+    fill: white;
+}
+
+.social-circle span {
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.footer-text {
+    font-size: 0.7rem;
+    letter-spacing: 1.5px;
+    background: linear-gradient(135deg, #b8e2f5, #00ffff);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* ========== RESPONSIVE ========== */
+@media (max-width: 780px) {
+    body {
+        padding: 20px 16px;
+    }
+    
+    .gallery {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+    
+    .track-content h2 {
+        font-size: 1.35rem;
+    }
+    
+    .platform-grid {
+        gap: 8px;
+    }
+    
+    .btn-aero {
+        padding: 6px 14px;
+        font-size: 0.7rem;
+    }
+    
+    .footer-aero {
+        border-radius: 45px;
+        padding: 20px 16px;
+    }
+    
+    .social-circle {
+        width: 44px;
+        height: 44px;
+    }
+    
+    .social-wave {
+        gap: 20px;
+    }
+    
+    .logo-gloss {
+        padding: 5px 20px;
+    }
+}
+
+::selection {
+    background: #00ffff;
+    color: #052c3a;
 }

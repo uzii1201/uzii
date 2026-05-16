@@ -2,94 +2,175 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>uzii</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+    <title>uzii music archive</title>
     <link rel="stylesheet" href="style.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <h1>uzii</h1>
-    <div class="gallery">
-        <!-- 1 -->
-        <div class="track">
-            <img src="img/cover1.jpg" alt="Tema 1" />
-            <div class="overlay">
-                <h2>Opposites Conciliation</h2>
-                <a href="https://youtu.be/SLAE0o5UfWA" target="_blank">YouTube</a>
-                <a href="https://open.spotify.com/intl-es/artist/1CJ2lPTQgMh2y1QKkHB916?si=askYK7EYRJaMfzD7eqiN0A" target="_blank">Spotify</a>
-                <a href="https://dzr.page.link/4JEMpwhkH3nMUH6o8" target="_blank">Deezer</a>
-                <a href="https://soundcloud.com/uzii_music/opposites-conciliation" target="_blank">Soundcloud</a>
-            </div>
-        </div>
-
-        <!-- 2 -->
-        <div class="track">
-            <img src="img/cover2.jpg" alt="Tema 2" />
-            <div class="overlay">
-                <h2>Anemoia</h2>
-                <a href="https://youtu.be/w0CcfU0EH-U" target="_blank">YouTube</a>
-                <a href="https://open.spotify.com/track/43Qo54gZFe3e1Zj8gMFsn8?si=qBgknFSdTleD8xvNh6UkfA" target="_blank">Spotify</a>
-                <a href="https://www.deezer.com/mx/album/782330031" target="_blank">Deezer</a>
-                <a href="https://soundcloud.com/uzii_music/anemoia" target="_blank">Soundcloud</a>
-            </div>
-        </div>
-
-        <!-- 3 -->
-        <div class="track">
-            <img src="img/cover3.jpg" alt="Tema 3" />
-            <div class="overlay">
-                <h2>Fluxtella</h2>
-                <a href="https://youtu.be/YWLtl41Er3o" target="_blank">YouTube</a>
-                <a href="https://open.spotify.com/album/5GmHKMowOwb8Nt3unzWOjc?si=K_cVOylkTfS2_1Vw6a5wjw" target="_blank">Spotify</a>
-                <a href="https://link.deezer.com/s/315wtMmFL7hmaBGzs6rxD" target="_blank">Deezer</a>
-                <a href="https://soundcloud.com/uzii_music/fluxtella" target="_blank">Soundcloud</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- 4 -->
-        <div class="track">
-            <img src="img/cover4.jpg" alt="Tema 4" />
-            <div class="overlay">
-                <h2>axioma</h2>
-                <a href="https://youtu.be/jQ-Q7qUnvJY?si=TBiuURxbmDqfZaa9" target="_blank">YouTube</a>
-                <a href="https://open.spotify.com/intl-es/track/2TBC1q16PiS00aWf8MFkRE?si=df369ac427424869" target="_blank">Spotify</a>
-                <a href="https://link.deezer.com/s/32wEEHBoIy7X8NiTxKaxc" target="_blank">Deezer</a>
-                <a href="https://soundcloud.com/uzii_music/axioma" target="_blank">Soundcloud</a>
-            </div>
-        </div>
-    </div>
+    <div class="aurora-bg"></div>
     
-    <!-- Footer con redes -->
-    <footer class="footer">
-        <div class="social-links">
-            <a href="https://www.instagram.com/uzii_archives/" target="_blank" aria-label="Instagram">
-                <!-- Instagram SVG -->
-                <svg viewBox="0 0 24 24" fill="currentColor" width="30" height="30">
-                    <path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 2 .2 2.5.4.6.2 1 .4 1.5.9.5.5.7.9.9 1.5.2.5.3 1.3.4 2.5.1 1.3.1 1.7.1 4.9s0 3.6-.1 4.9c-.1 1.2-.2 2-.4 2.5-.2.6-.4 1-.9 1.5-.5.5-.9.7-1.5.9-.5.2-1.3.3-2.5.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-2-.2-2.5-.4-.6-.2-1-.4-1.5-.9-.5-.5-.7-.9-.9-1.5-.2-.5-.3-1.3-.4-2.5C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.2-2 .4-2.5.2-.6.4-1 .9-1.5.5-.5.9-.7 1.5-.9.5-.2 1.3-.3 2.5-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.8.1-1.1.1-1.7.2-2.1.3-.5.2-.8.4-1.1.7-.3.3-.5.6-.7 1.1-.1.4-.2 1-.3 2.1C3 9.6 3 10 3 12s0 2.4.1 3.8c.1 1.1.2 1.7.3 2.1.2.5.4.8.7 1.1.3.3.6.5 1.1.7.4.1 1 .2 2.1.3 1.3.1 1.7.1 4.8.1s3.5 0 4.8-.1c1.1-.1 1.7-.2 2.1-.3.5-.2.8-.4 1.1-.7.3-.3.5-.6.7-1.1.1-.4.2-1 .3-2.1.1-1.3.1-1.7.1-4.8s0-3.5-.1-4.8c-.1-1.1-.2-1.7-.3-2.1-.2-.5-.4-.8-.7-1.1-.3-.3-.6-.5-1.1-.7-.4-.1-1-.2-2.1-.3C15.5 4 15.1 4 12 4zm0 3.2a4.8 4.8 0 1 1 0 9.6 4.8 4.8 0 0 1 0-9.6zm0 1.8a3 3 0 1 0 0 6 3 3 0 0 0 0-6zm5.6-.9a1.1 1.1 0 1 1-2.2 0 1.1 1.1 0 0 1 2.2 0z"/>
-                </svg>
-            </a>
-            <a href="https://www.youtube.com/@uzii-v8" target="_blank" aria-label="YouTube">
-                <!-- YouTube SVG -->
-                <svg viewBox="0 0 24 24" fill="currentColor" width="30" height="30">
-                    <path d="M23.5 6.2s-.2-1.6-.8-2.3a2.7 2.7 0 0 0-1.9-1.9c-1.6-.4-8.1-.4-8.1-.4s-6.5 0-8.1.4a2.7 2.7 0 0 0-1.9 1.9C2.1 4.6 2 6.2 2 6.2S2 8 2 9.8v1.4c0 1.8.1 3.6.1 3.6s.2 1.6.8 2.3a2.7 2.7 0 0 0 1.9 1.9c1.6.4 8.1.4 8.1.4s6.5 0 8.1-.4a2.7 2.7 0 0 0 1.9-1.9c.6-.7.8-2.3.8-2.3s.1-1.8.1-3.6v-1.4c0-1.8-.1-3.6-.1-3.6zM9.8 14.5V8.5l6 3-6 3z"/>
-                </svg>
-            </a>
-            <a href="https://rateyourmusic.com/~traumi_h" target="_blank" aria-label="RateYourMusic">
-                <!-- RateYourMusic SVG (estrella) -->
-                <svg viewBox="0 0 50 24" fill="currentColor" width="36" height="30">
-                    <text x="0" y="18" font-family="Arial, sans-serif" font-size="18" font-weight="bold">RYM</text>
-                </svg>
-            </a>
-        </div>
-    </footer>
+    <div class="container">
+        <header class="frutiger-header">
+            <div class="logo-gloss">
+                <h1 class="glass-title">uzii</h1>
+                <div class="shine"></div>
+            </div>
+            <div class="aero-divider">
+                <div class="divider-glow"></div>
+            </div>
+        </header>
+
+        <main>
+            <div class="gallery">
+                <!-- Track 1 -->
+                <div class="track">
+                    <div class="cover-wrapper">
+                        <img src="img/Opposites Conciliation.jpg" alt="Opposites Conciliation" class="cover-img">
+                        <div class="glare-effect"></div>
+                    </div>
+                    <div class="track-content">
+                        <h2>Opposites Conciliation</h2>
+                        <div class="platform-grid">
+                            <a href="https://youtu.be/SLAE0o5UfWA" target="_blank" class="btn-aero">YouTube</a>
+                            <a href="https://open.spotify.com/intl-es/artist/1CJ2lPTQgMh2y1QKkHB916?si=askYK7EYRJaMfzD7eqiN0A" target="_blank" class="btn-aero">Spotify</a>
+                            <a href="https://dzr.page.link/4JEMpwhkH3nMUH6o8" target="_blank" class="btn-aero">Deezer</a>
+                            <a href="https://soundcloud.com/uzii_music/opposites-conciliation" target="_blank" class="btn-aero">SoundCloud</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 2 -->
+                <div class="track">
+                    <div class="cover-wrapper">
+                        <img src="img/Anemoia.jpg" alt="Anemoia" class="cover-img">
+                        <div class="glare-effect"></div>
+                    </div>
+                    <div class="track-content">
+                        <h2>Anemoia</h2>
+                        <div class="platform-grid">
+                            <a href="https://youtu.be/w0CcfU0EH-U" target="_blank" class="btn-aero">YouTube</a>
+                            <a href="https://open.spotify.com/track/43Qo54gZFe3e1Zj8gMFsn8?si=qBgknFSdTleD8xvNh6UkfA" target="_blank" class="btn-aero">Spotify</a>
+                            <a href="https://www.deezer.com/mx/album/782330031" target="_blank" class="btn-aero">Deezer</a>
+                            <a href="https://soundcloud.com/uzii_music/anemoia" target="_blank" class="btn-aero">SoundCloud</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 3 -->
+                <div class="track">
+                    <div class="cover-wrapper">
+                        <img src="img/Fluxtella.jpg" alt="Fluxtella" class="cover-img">
+                        <div class="glare-effect"></div>
+                    </div>
+                    <div class="track-content">
+                        <h2>Fluxtella</h2>
+                        <div class="platform-grid">
+                            <a href="https://youtu.be/YWLtl41Er3o" target="_blank" class="btn-aero">YouTube</a>
+                            <a href="https://open.spotify.com/album/5GmHKMowOwb8Nt3unzWOjc?si=K_cVOylkTfS2_1Vw6a5wjw" target="_blank" class="btn-aero">Spotify</a>
+                            <a href="https://link.deezer.com/s/315wtMmFL7hmaBGzs6rxD" target="_blank" class="btn-aero">Deezer</a>
+                            <a href="https://soundcloud.com/uzii_music/fluxtella" target="_blank" class="btn-aero">SoundCloud</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 4 -->
+                <div class="track">
+                    <div class="cover-wrapper">
+                        <img src="img/Axioma.jpg" alt="axioma" class="cover-img">
+                        <div class="glare-effect"></div>
+                    </div>
+                    <div class="track-content">
+                        <h2>axioma</h2>
+                        <div class="platform-grid">
+                            <a href="https://youtu.be/jQ-Q7qUnvJY?si=TBiuURxbmDqfZaa9" target="_blank" class="btn-aero">YouTube</a>
+                            <a href="https://open.spotify.com/intl-es/track/2TBC1q16PiS00aWf8MFkRE?si=df369ac427424869" target="_blank" class="btn-aero">Spotify</a>
+                            <a href="https://link.deezer.com/s/32wEEHBoIy7X8NiTxKaxc" target="_blank" class="btn-aero">Deezer</a>
+                            <a href="https://soundcloud.com/uzii_music/axioma" target="_blank" class="btn-aero">SoundCloud</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 5 -->
+                <div class="track">
+                    <div class="cover-wrapper">
+                        <img src="img/jam.jpg" alt="jam" class="cover-img">
+                        <div class="glare-effect"></div>
+                    </div>
+                    <div class="track-content">
+                        <h2>jam</h2>
+                        <div class="platform-grid">
+                            <a href="#" target="_blank" class="btn-aero">YouTube</a>
+                            <a href="#" target="_blank" class="btn-aero">Spotify</a>
+                            <a href="#" target="_blank" class="btn-aero">Deezer</a>
+                            <a href="#" target="_blank" class="btn-aero">SoundCloud</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 6 -->
+                <div class="track">
+                    <div class="cover-wrapper">
+                        <img src="img/Lost in the Abyss.jpg" alt="Lost in the Abyss" class="cover-img">
+                        <div class="glare-effect"></div>
+                    </div>
+                    <div class="track-content">
+                        <h2>Lost in the Abyss</h2>
+                        <div class="platform-grid">
+                            <a href="#" target="_blank" class="btn-aero">YouTube</a>
+                            <a href="#" target="_blank" class="btn-aero">Spotify</a>
+                            <a href="#" target="_blank" class="btn-aero">Deezer</a>
+                            <a href="#" target="_blank" class="btn-aero">SoundCloud</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Track 7 -->
+                <div class="bubble-track">
+                    <div class="track">
+                        <div class="cover-wrapper">
+                            <img src="img/NO BUSCO GUSTARTE.jpg" alt="NO BUSCO GUSTARTE" class="cover-img">
+                            <div class="glare-effect"></div>
+                        </div>
+                        <div class="track-content">
+                            <h2>NO BUSCO GUSTARTE</h2>
+                            <div class="platform-grid">
+                                <a href="https://www.youtube.com/playlist?list=PL6jD-G1O4st51ehf6KKpQWvvv-YyVnb-r" target="_blank" class="btn-aero youtube">YouTube</a>
+                                <a href="https://open.spotify.com/album/7uj04I9kciplm8Ure6djap" target="_blank" class="btn-aero spotify">Spotify</a>
+                                <a href="https://www.deezer.com/album/905676252" target="_blank" class="btn-aero deezer">Deezer</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        
+
+        <footer class="footer-aero">
+            <div class="social-wave">
+                <!-- Instagram con SVG correcto -->
+                                <!-- Instagram con gradiente real -->
+                <a href="https://www.instagram.com/uzii_archives/" target="_blank" class="social-circle">
+                  <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.336 3.608 1.311.975.975 1.249 2.242 1.311 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.336 2.633-1.311 3.608-.975.975-2.242 1.249-3.608 1.311-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.336-3.608-1.311-.975-.975-1.249-2.242-1.311-3.608-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.336-2.633 1.311-3.608.975-.975 2.242-1.249 3.608-1.311C8.416 2.175 8.796 2.163 12 2.163zM12 0C8.741 0 8.332.014 7.052.072 5.197.157 3.674.472 2.417 1.729.16 3.986.157 3.986.072 7.052.014 8.332 0 8.741 0 12c0 3.259.014 3.668.072 4.948.085 2.066.4 3.589 1.657 4.846 1.257 1.257 2.78 1.572 4.846 1.657 1.28.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 2.066-.085 3.589-.4 4.846-1.657 1.257-1.257 1.572-2.78 1.657-4.846.058-1.28.072-1.689.072-4.948 0-3.259-.014-3.668-.072-4.948-.085-2.066-.4-3.589-1.657-4.846-1.257-1.257-2.78-1.572-4.846-1.657C15.668.014 15.259 0 12 0z"/>
+                    <path d="M12 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"/>
+                    <circle cx="18.406" cy="5.594" r="1.44"/>
+                  </svg>
+                </a>
+                <a href="https://www.youtube.com/@uzii-v8" target="_blank" class="social-circle">
+                    <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor">
+                        <path d="M23.5 6.2s-.2-1.6-.8-2.3a2.7 2.7 0 0 0-1.9-1.9c-1.6-.4-8.1-.4-8.1-.4s-6.5 0-8.1.4a2.7 2.7 0 0 0-1.9 1.9C2.1 4.6 2 6.2 2 6.2S2 8 2 9.8v1.4c0 1.8.1 3.6.1 3.6s.2 1.6.8 2.3a2.7 2.7 0 0 0 1.9 1.9c1.6.4 8.1.4 8.1.4s6.5 0 8.1-.4a2.7 2.7 0 0 0 1.9-1.9c.6-.7.8-2.3.8-2.3s.1-1.8.1-3.6v-1.4c0-1.8-.1-3.6-.1-3.6zM9.8 14.5V8.5l6 3-6 3z"/>
+                    </svg>
+                </a>
+                <a href="https://rateyourmusic.com/~traumi_h" target="_blank" class="social-circle">
+                    <span>RYM</span>
+                </a>
+            </div>
+            <p class="footer-text">uzii music archive</p>
+        </footer>
+    </div>
 
     <script src="script.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
